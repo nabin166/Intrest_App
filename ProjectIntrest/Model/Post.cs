@@ -18,7 +18,7 @@ namespace ProjectIntrest.Model
         public string audio { get; set; }
 
         
-        public int user_Id { get; set; }
+        public int? user_Id { get; set; }
         public virtual User user { get; set; }
 
         public virtual ICollection<Pin> pins { get; set; }

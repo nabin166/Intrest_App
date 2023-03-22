@@ -5,12 +5,12 @@ namespace ProjectIntrest.Model
     public class Message
     {
         [Key]
-        public int message_Id { get; set; }
+        public int messageId { get; set; }
 
-        public int user_Id { get; set; }
+        public int? user_Id { get; set; }
         public int receiver { get; set; }
 
-       
+
         public string actualMessage { get; set; }
         public string messegeFile { get; set; }
 

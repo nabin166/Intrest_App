@@ -10,12 +10,12 @@ namespace ProjectIntrest.Model
             posts = new HashSet<Post>();
             messages = new HashSet<Message>();
             followers = new HashSet<Follower>();
-           // pins = new HashSet<Pin>();
-           // replies = new HashSet<Reply>();
+            pins = new HashSet<Pin>();
+            replies = new HashSet<Reply>();
         }
 
         [Key]
-        public int user_Id { get; set; }
+        public int userId { get; set; }
         [Required]
         public string photo { get; set; }
         [Required]
@@ -35,7 +35,7 @@ namespace ProjectIntrest.Model
 
         public virtual ICollection<Follower> followers { get; set; }
 
-       // public virtual ICollection<Pin> pins { get; set; }
-      //  public virtual ICollection<Reply> replies { get; set; }
+        public virtual ICollection<Pin> pins { get; set; }
+        public virtual ICollection<Reply> replies { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace ProjectIntrest.Migrations
                     b.Property<int>("followedTo")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_Id")
+                    b.Property<int?>("user_Id")
                         .HasColumnType("int");
 
                     b.HasKey("followerId");
@@ -45,20 +45,20 @@ namespace ProjectIntrest.Migrations
 
             modelBuilder.Entity("ProjectIntrest.Model.Intrest", b =>
                 {
-                    b.Property<int>("intrest_Id")
+                    b.Property<int>("intrestId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("intrest_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("intrestId"), 1L, 1);
 
-                    b.Property<int>("intrestCategory_Id")
+                    b.Property<int?>("intrestCategory_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("intrestName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("intrest_Id");
+                    b.HasKey("intrestId");
 
                     b.HasIndex("intrestCategory_Id");
 
@@ -67,20 +67,20 @@ namespace ProjectIntrest.Migrations
 
             modelBuilder.Entity("ProjectIntrest.Model.IntrestsCategory", b =>
                 {
-                    b.Property<int>("intrestCategory_Id")
+                    b.Property<int>("intrestCategoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("intrestCategory_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("intrestCategoryId"), 1L, 1);
 
                     b.Property<string>("categoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("user_Id")
+                    b.Property<int?>("user_Id")
                         .HasColumnType("int");
 
-                    b.HasKey("intrestCategory_Id");
+                    b.HasKey("intrestCategoryId");
 
                     b.HasIndex("user_Id");
 
@@ -89,11 +89,11 @@ namespace ProjectIntrest.Migrations
 
             modelBuilder.Entity("ProjectIntrest.Model.Message", b =>
                 {
-                    b.Property<int>("message_Id")
+                    b.Property<int>("messageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("message_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("messageId"), 1L, 1);
 
                     b.Property<string>("actualMessage")
                         .IsRequired()
@@ -109,10 +109,10 @@ namespace ProjectIntrest.Migrations
                     b.Property<int>("receiver")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_Id")
+                    b.Property<int?>("user_Id")
                         .HasColumnType("int");
 
-                    b.HasKey("message_Id");
+                    b.HasKey("messageId");
 
                     b.HasIndex("user_Id");
 
@@ -121,21 +121,23 @@ namespace ProjectIntrest.Migrations
 
             modelBuilder.Entity("ProjectIntrest.Model.Pin", b =>
                 {
-                    b.Property<int>("pin_Id")
+                    b.Property<int>("pinId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pin_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pinId"), 1L, 1);
 
-                    b.Property<int>("post_Id")
+                    b.Property<int?>("post_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_Id")
+                    b.Property<int?>("user_Id")
                         .HasColumnType("int");
 
-                    b.HasKey("pin_Id");
+                    b.HasKey("pinId");
 
                     b.HasIndex("post_Id");
+
+                    b.HasIndex("user_Id");
 
                     b.ToTable("Pin", (string)null);
                 });
@@ -156,7 +158,7 @@ namespace ProjectIntrest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("user_Id")
+                    b.Property<int?>("user_Id")
                         .HasColumnType("int");
 
                     b.HasKey("postId");
@@ -168,32 +170,38 @@ namespace ProjectIntrest.Migrations
 
             modelBuilder.Entity("ProjectIntrest.Model.Reply", b =>
                 {
-                    b.Property<int>("reply_Id")
+                    b.Property<int>("replyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("reply_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("replyId"), 1L, 1);
 
-                    b.Property<int>("post_Id")
+                    b.Property<int?>("post_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_Id")
+                    b.Property<string>("reply")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("user_Id")
                         .HasColumnType("int");
 
-                    b.HasKey("reply_Id");
+                    b.HasKey("replyId");
 
                     b.HasIndex("post_Id");
+
+                    b.HasIndex("user_Id");
 
                     b.ToTable("Reply", (string)null);
                 });
 
             modelBuilder.Entity("ProjectIntrest.Model.User", b =>
                 {
-                    b.Property<int>("user_Id")
+                    b.Property<int>("userId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("user_Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"), 1L, 1);
 
                     b.Property<string>("avatarPhoto")
                         .IsRequired()
@@ -217,7 +225,7 @@ namespace ProjectIntrest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("user_Id");
+                    b.HasKey("userId");
 
                     b.ToTable("Users");
                 });
@@ -226,9 +234,7 @@ namespace ProjectIntrest.Migrations
                 {
                     b.HasOne("ProjectIntrest.Model.User", "user")
                         .WithMany("followers")
-                        .HasForeignKey("user_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("user_Id");
 
                     b.Navigation("user");
                 });
@@ -237,9 +243,7 @@ namespace ProjectIntrest.Migrations
                 {
                     b.HasOne("ProjectIntrest.Model.IntrestsCategory", "intrestsCategorie")
                         .WithMany("intrests")
-                        .HasForeignKey("intrestCategory_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("intrestCategory_Id");
 
                     b.Navigation("intrestsCategorie");
                 });
@@ -248,9 +252,7 @@ namespace ProjectIntrest.Migrations
                 {
                     b.HasOne("ProjectIntrest.Model.User", "user")
                         .WithMany("intrestCategories")
-                        .HasForeignKey("user_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("user_Id");
 
                     b.Navigation("user");
                 });
@@ -259,9 +261,7 @@ namespace ProjectIntrest.Migrations
                 {
                     b.HasOne("ProjectIntrest.Model.User", "user")
                         .WithMany("messages")
-                        .HasForeignKey("user_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("user_Id");
 
                     b.Navigation("user");
                 });
@@ -270,20 +270,22 @@ namespace ProjectIntrest.Migrations
                 {
                     b.HasOne("ProjectIntrest.Model.Post", "post")
                         .WithMany("pins")
-                        .HasForeignKey("post_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("post_Id");
+
+                    b.HasOne("ProjectIntrest.Model.User", "user")
+                        .WithMany("pins")
+                        .HasForeignKey("user_Id");
 
                     b.Navigation("post");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("ProjectIntrest.Model.Post", b =>
                 {
                     b.HasOne("ProjectIntrest.Model.User", "user")
                         .WithMany("posts")
-                        .HasForeignKey("user_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("user_Id");
 
                     b.Navigation("user");
                 });
@@ -292,11 +294,15 @@ namespace ProjectIntrest.Migrations
                 {
                     b.HasOne("ProjectIntrest.Model.Post", "post")
                         .WithMany("replies")
-                        .HasForeignKey("post_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("post_Id");
+
+                    b.HasOne("ProjectIntrest.Model.User", "user")
+                        .WithMany("replies")
+                        .HasForeignKey("user_Id");
 
                     b.Navigation("post");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("ProjectIntrest.Model.IntrestsCategory", b =>
@@ -319,7 +325,11 @@ namespace ProjectIntrest.Migrations
 
                     b.Navigation("messages");
 
+                    b.Navigation("pins");
+
                     b.Navigation("posts");
+
+                    b.Navigation("replies");
                 });
 #pragma warning restore 612, 618
         }

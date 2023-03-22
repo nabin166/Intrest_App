@@ -10,17 +10,17 @@ namespace ProjectIntrest.Model
         }
 
         [Key]
-        public int intrestCategory_Id { get; set; }
+        public int intrestCategoryId { get; set; }
         [Required]
         public string categoryName { get; set; }
 
-        public int user_Id { get; set; }
+        public int? user_Id { get; set; }
 
         public virtual User user { get; set; }
 
         public virtual ICollection<Intrest> intrests { get; set; }
 
-       
+
 
     }
 }

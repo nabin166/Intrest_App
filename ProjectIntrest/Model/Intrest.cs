@@ -6,13 +6,13 @@ namespace ProjectIntrest.Model
     {
 
 
-        
+
         [Key]
-        public int intrest_Id { get; set; }
+        public int intrestId { get; set; }
         [Required]
         public string intrestName { get; set; }
 
-        public int intrestCategory_Id { get; set; }
+        public int? intrestCategory_Id { get; set; }
 
         public virtual IntrestsCategory intrestsCategorie { get; set; }
 

@@ -5,45 +5,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectIntrest.Migrations
 {
-    public partial class First : Migration
+    public partial class jk : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Followers",
-                columns: table => new
-                {
-                    followerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    followedBy = table.Column<int>(type: "int", nullable: false),
-                    followedTo = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Followers", x => x.followerId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Messages",
-                columns: table => new
-                {
-                    message_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    sender = table.Column<int>(type: "int", nullable: false),
-                    receiver = table.Column<int>(type: "int", nullable: false),
-                    actualMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    messegeFile = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Messages", x => x.message_Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    user_Id = table.Column<int>(type: "int", nullable: false)
+                    userId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     avatarPhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -54,27 +24,67 @@ namespace ProjectIntrest.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.user_Id);
+                    table.PrimaryKey("PK_Users", x => x.userId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Follower",
+                columns: table => new
+                {
+                    followerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    user_Id = table.Column<int>(type: "int", nullable: true),
+                    followedTo = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Follower", x => x.followerId);
+                    table.ForeignKey(
+                        name: "FK_Follower_Users_user_Id",
+                        column: x => x.user_Id,
+                        principalTable: "Users",
+                        principalColumn: "userId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "IntrestsCategory",
                 columns: table => new
                 {
-                    intrestCategory_Id = table.Column<int>(type: "int", nullable: false)
+                    intrestCategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     categoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    user_Id = table.Column<int>(type: "int", nullable: false)
+                    user_Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IntrestsCategory", x => x.intrestCategory_Id);
+                    table.PrimaryKey("PK_IntrestsCategory", x => x.intrestCategoryId);
                     table.ForeignKey(
                         name: "FK_IntrestsCategory_Users_user_Id",
                         column: x => x.user_Id,
                         principalTable: "Users",
-                        principalColumn: "user_Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "userId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Message",
+                columns: table => new
+                {
+                    messageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    user_Id = table.Column<int>(type: "int", nullable: true),
+                    receiver = table.Column<int>(type: "int", nullable: false),
+                    actualMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    messegeFile = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Message", x => x.messageId);
+                    table.ForeignKey(
+                        name: "FK_Message_Users_user_Id",
+                        column: x => x.user_Id,
+                        principalTable: "Users",
+                        principalColumn: "userId");
                 });
 
             migrationBuilder.CreateTable(
@@ -85,7 +95,7 @@ namespace ProjectIntrest.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     audio = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    user_Id = table.Column<int>(type: "int", nullable: false)
+                    user_Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,69 +104,81 @@ namespace ProjectIntrest.Migrations
                         name: "FK_Post_Users_user_Id",
                         column: x => x.user_Id,
                         principalTable: "Users",
-                        principalColumn: "user_Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "userId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Intrest",
                 columns: table => new
                 {
-                    intrest_Id = table.Column<int>(type: "int", nullable: false)
+                    intrestId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     intrestName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    intrestCategory_Id = table.Column<int>(type: "int", nullable: false)
+                    intrestCategory_Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Intrest", x => x.intrest_Id);
+                    table.PrimaryKey("PK_Intrest", x => x.intrestId);
                     table.ForeignKey(
                         name: "FK_Intrest_IntrestsCategory_intrestCategory_Id",
                         column: x => x.intrestCategory_Id,
                         principalTable: "IntrestsCategory",
-                        principalColumn: "intrestCategory_Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "intrestCategoryId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Pin",
                 columns: table => new
                 {
-                    pin_Id = table.Column<int>(type: "int", nullable: false)
+                    pinId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    user_Id = table.Column<int>(type: "int", nullable: false),
-                    post_Id = table.Column<int>(type: "int", nullable: false)
+                    user_Id = table.Column<int>(type: "int", nullable: true),
+                    post_Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pin", x => x.pin_Id);
+                    table.PrimaryKey("PK_Pin", x => x.pinId);
                     table.ForeignKey(
                         name: "FK_Pin_Post_post_Id",
                         column: x => x.post_Id,
                         principalTable: "Post",
-                        principalColumn: "postId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "postId");
+                    table.ForeignKey(
+                        name: "FK_Pin_Users_user_Id",
+                        column: x => x.user_Id,
+                        principalTable: "Users",
+                        principalColumn: "userId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Reply",
                 columns: table => new
                 {
-                    reply_Id = table.Column<int>(type: "int", nullable: false)
+                    replyId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    user_Id = table.Column<int>(type: "int", nullable: false),
-                    post_Id = table.Column<int>(type: "int", nullable: false)
+                    user_Id = table.Column<int>(type: "int", nullable: true),
+                    post_Id = table.Column<int>(type: "int", nullable: true),
+                    reply = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reply", x => x.reply_Id);
+                    table.PrimaryKey("PK_Reply", x => x.replyId);
                     table.ForeignKey(
                         name: "FK_Reply_Post_post_Id",
                         column: x => x.post_Id,
                         principalTable: "Post",
-                        principalColumn: "postId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "postId");
+                    table.ForeignKey(
+                        name: "FK_Reply_Users_user_Id",
+                        column: x => x.user_Id,
+                        principalTable: "Users",
+                        principalColumn: "userId");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Follower_user_Id",
+                table: "Follower",
+                column: "user_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Intrest_intrestCategory_Id",
@@ -169,9 +191,19 @@ namespace ProjectIntrest.Migrations
                 column: "user_Id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Message_user_Id",
+                table: "Message",
+                column: "user_Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pin_post_Id",
                 table: "Pin",
                 column: "post_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pin_user_Id",
+                table: "Pin",
+                column: "user_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_user_Id",
@@ -182,18 +214,23 @@ namespace ProjectIntrest.Migrations
                 name: "IX_Reply_post_Id",
                 table: "Reply",
                 column: "post_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reply_user_Id",
+                table: "Reply",
+                column: "user_Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Followers");
+                name: "Follower");
 
             migrationBuilder.DropTable(
                 name: "Intrest");
 
             migrationBuilder.DropTable(
-                name: "Messages");
+                name: "Message");
 
             migrationBuilder.DropTable(
                 name: "Pin");

@@ -47,9 +47,9 @@ namespace ProjectIntrest.Model
             {
                 entity.ToTable("Pin");
 
-               /* entity.HasOne(p => p.user)
+                entity.HasOne(p => p.user)
                 .WithMany(e => e.pins)
-                .HasForeignKey(m => m.user_Id);*/
+                .HasForeignKey(m => m.user_Id); 
 
                 entity.HasOne(p => p.post)
                 .WithMany(e => e.pins)
@@ -59,9 +59,9 @@ namespace ProjectIntrest.Model
             modelBuilder.Entity<Reply>(entity =>
             {
                 entity.ToTable("Reply");
-            /*    entity.HasOne(p => p.user)
+                entity.HasOne(p => p.user)
                 .WithMany(e => e.replies)
-                .HasForeignKey(m => m.user_Id);*/
+                .HasForeignKey(m => m.user_Id);
 
                 entity.HasOne(p => p.post)
                 .WithMany(e => e.replies)
@@ -92,7 +92,7 @@ namespace ProjectIntrest.Model
             {
                 entity.ToTable("Follower");
                 entity.HasOne(p => p.user)
-                .WithMany(e => e. )
+                .WithMany(e => e.followers )
                 .HasForeignKey(m => m.user_Id);
 
 
