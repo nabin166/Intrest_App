@@ -9,9 +9,12 @@ namespace ProjectIntrest.Model
             intrestCategories = new HashSet<IntrestsCategory>();
             posts = new HashSet<Post>();
             messages = new HashSet<Message>();
+            rmessages = new HashSet<Message>();
             followers = new HashSet<Follower>();
+            ffollowers = new HashSet<Follower>();
             pins = new HashSet<Pin>();
             replies = new HashSet<Reply>();
+         
         }
 
         [Key]
@@ -33,9 +36,12 @@ namespace ProjectIntrest.Model
         public virtual ICollection<Post> posts { get; set; }
         public virtual ICollection<Message> messages { get; set; }
 
+        public virtual ICollection<Message> rmessages { get; set; }
         public virtual ICollection<Follower> followers { get; set; }
+        public virtual ICollection<Follower> ffollowers { get; set; }
 
         public virtual ICollection<Pin> pins { get; set; }
         public virtual ICollection<Reply> replies { get; set; }
+    
     }
 }

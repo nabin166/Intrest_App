@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectIntrest.Migrations
 {
-    public partial class jk : Migration
+    public partial class kj : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,11 +34,16 @@ namespace ProjectIntrest.Migrations
                     followerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     user_Id = table.Column<int>(type: "int", nullable: true),
-                    followedTo = table.Column<int>(type: "int", nullable: false)
+                    followed_Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Follower", x => x.followerId);
+                    table.ForeignKey(
+                        name: "FK_Follower_Users_followed_Id",
+                        column: x => x.followed_Id,
+                        principalTable: "Users",
+                        principalColumn: "userId");
                     table.ForeignKey(
                         name: "FK_Follower_Users_user_Id",
                         column: x => x.user_Id,
@@ -72,7 +77,7 @@ namespace ProjectIntrest.Migrations
                     messageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     user_Id = table.Column<int>(type: "int", nullable: true),
-                    receiver = table.Column<int>(type: "int", nullable: false),
+                    receiver_Id = table.Column<int>(type: "int", nullable: true),
                     actualMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     messegeFile = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     dateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -80,6 +85,11 @@ namespace ProjectIntrest.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Message", x => x.messageId);
+                    table.ForeignKey(
+                        name: "FK_Message_Users_receiver_Id",
+                        column: x => x.receiver_Id,
+                        principalTable: "Users",
+                        principalColumn: "userId");
                     table.ForeignKey(
                         name: "FK_Message_Users_user_Id",
                         column: x => x.user_Id,
@@ -176,6 +186,11 @@ namespace ProjectIntrest.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Follower_followed_Id",
+                table: "Follower",
+                column: "followed_Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Follower_user_Id",
                 table: "Follower",
                 column: "user_Id");
@@ -189,6 +204,11 @@ namespace ProjectIntrest.Migrations
                 name: "IX_IntrestsCategory_user_Id",
                 table: "IntrestsCategory",
                 column: "user_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Message_receiver_Id",
+                table: "Message",
+                column: "receiver_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Message_user_Id",

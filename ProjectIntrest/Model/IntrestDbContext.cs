@@ -85,18 +85,56 @@ namespace ProjectIntrest.Model
                 .WithMany(e => e.messages)
                 .HasForeignKey(m => m.user_Id);
 
+                entity.HasOne(p => p.ruser)
+                .WithMany(e=>e.rmessages)
+                .HasForeignKey(p=>p.receiver_Id);
+
 
             });
 
             modelBuilder.Entity<Follower>(entity =>
             {
                 entity.ToTable("Follower");
+
                 entity.HasOne(p => p.user)
                 .WithMany(e => e.followers )
                 .HasForeignKey(m => m.user_Id);
 
+                entity.HasOne(p => p.fuser)
+                .WithMany(e => e.ffollowers)
+                .HasForeignKey(m=>m.followed_Id);
+
 
             });
+         /*   modelBuilder.Entity<MessageReceiver>(entity =>
+            {
+                entity.ToTable("MessageReceiver");
+
+                entity.HasOne(p => p.user)
+                .WithMany(e => e.messageReceivers)
+                .HasForeignKey(m => m.user_Id);
+
+                 entity.HasOne(p => p.message)
+                 .WithMany(e => e.messageReceivers)
+                 .HasForeignKey(m=>m.message_Id);
+
+
+            });
+
+            modelBuilder.Entity<Followed>(entity =>
+            {
+                entity.ToTable("Followed");
+
+                entity.HasOne(p => p.user)
+                .WithMany(e => e.Followeds)
+                .HasForeignKey(m => m.user_Id);
+
+                entity.HasOne(p => p.Follower)
+                .WithMany(e => e.Followeds)
+                .HasForeignKey(m => m.follower_Id);
+
+
+            });*/
 
             OnModelCreatingPartial(modelBuilder);
             }

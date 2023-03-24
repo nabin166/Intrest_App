@@ -4,12 +4,18 @@ namespace ProjectIntrest.Model
 {
     public class Follower
     {
+   
         [Key]
         public int followerId { get; set; }
 
         public int? user_Id { get; set; }
-        public int followedTo { get; set; }
+        public int? followed_Id { get; set; }
 
-        public User user { get; set; }
+        public virtual User user { get; set; }
+        public virtual User fuser { get; set; }
+
+        
+
+
     }
 }

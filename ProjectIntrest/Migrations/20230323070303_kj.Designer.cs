@@ -12,8 +12,8 @@ using ProjectIntrest.Model;
 namespace ProjectIntrest.Migrations
 {
     [DbContext(typeof(IntrestDbContext))]
-    [Migration("20230322075201_jk")]
-    partial class jk
+    [Migration("20230323070303_kj")]
+    partial class kj
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,13 +32,15 @@ namespace ProjectIntrest.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("followerId"), 1L, 1);
 
-                    b.Property<int>("followedTo")
+                    b.Property<int?>("followed_Id")
                         .HasColumnType("int");
 
                     b.Property<int?>("user_Id")
                         .HasColumnType("int");
 
                     b.HasKey("followerId");
+
+                    b.HasIndex("followed_Id");
 
                     b.HasIndex("user_Id");
 
@@ -108,13 +110,15 @@ namespace ProjectIntrest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("receiver")
+                    b.Property<int?>("receiver_Id")
                         .HasColumnType("int");
 
                     b.Property<int?>("user_Id")
                         .HasColumnType("int");
 
                     b.HasKey("messageId");
+
+                    b.HasIndex("receiver_Id");
 
                     b.HasIndex("user_Id");
 
@@ -234,9 +238,15 @@ namespace ProjectIntrest.Migrations
 
             modelBuilder.Entity("ProjectIntrest.Model.Follower", b =>
                 {
+                    b.HasOne("ProjectIntrest.Model.User", "fuser")
+                        .WithMany("ffollowers")
+                        .HasForeignKey("followed_Id");
+
                     b.HasOne("ProjectIntrest.Model.User", "user")
                         .WithMany("followers")
                         .HasForeignKey("user_Id");
+
+                    b.Navigation("fuser");
 
                     b.Navigation("user");
                 });
@@ -261,9 +271,15 @@ namespace ProjectIntrest.Migrations
 
             modelBuilder.Entity("ProjectIntrest.Model.Message", b =>
                 {
+                    b.HasOne("ProjectIntrest.Model.User", "ruser")
+                        .WithMany("rmessages")
+                        .HasForeignKey("receiver_Id");
+
                     b.HasOne("ProjectIntrest.Model.User", "user")
                         .WithMany("messages")
                         .HasForeignKey("user_Id");
+
+                    b.Navigation("ruser");
 
                     b.Navigation("user");
                 });
@@ -321,6 +337,8 @@ namespace ProjectIntrest.Migrations
 
             modelBuilder.Entity("ProjectIntrest.Model.User", b =>
                 {
+                    b.Navigation("ffollowers");
+
                     b.Navigation("followers");
 
                     b.Navigation("intrestCategories");
@@ -332,6 +350,8 @@ namespace ProjectIntrest.Migrations
                     b.Navigation("posts");
 
                     b.Navigation("replies");
+
+                    b.Navigation("rmessages");
                 });
 #pragma warning restore 612, 618
         }
