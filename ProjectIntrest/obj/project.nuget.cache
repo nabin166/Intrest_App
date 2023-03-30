@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ESVGsRfQ0gJyjyGvFonq+IbXdS2zZMebDO7Eh98rFoN3JLe3morW05/vr5HbdDALA1yARJy5keVv1eJ3f4CTvg==",
+  "dgSpecHash": "YyqOp3jtVw5Mfl9i5krx4f9Y71DHdnIRJdT1+2KtCzN37Qb/7yZQYzdgLCZf36BXoseb2/i+5W4ejKhJN3VW2g==",
   "success": true,
   "projectFilePath": "C:\\Users\\DELL\\Desktop\\.net project\\ProjectIntrest\\ProjectIntrest\\ProjectIntrest.csproj",
   "expectedPackageFiles": [
@@ -36,8 +36,8 @@
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
-    "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
-    "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",

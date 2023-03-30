@@ -1,9 +1,9 @@
-﻿namespace ProjectIntrest.Interface.IInterface
+﻿using ProjectIntrest.Model;
+
+namespace ProjectIntrest.Interface.IInterface
 {
     public interface IIntrestCategory
     {
-        int intrestCategoryId { get; set; }
-        string categoryName { get; set; }
-        int? user_Id { get; set; }
-    }
+        IntrestsCategory  intrestsCategory { get; set; }
+     }
 }

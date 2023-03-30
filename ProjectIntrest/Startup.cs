@@ -28,9 +28,12 @@ namespace ProjectIntrest
             services.AddControllersWithViews();
 
 
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+
             ////
             ///
-            services.AddSwaggerGen(options =>
+       /*     services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
@@ -39,7 +42,7 @@ namespace ProjectIntrest
                     Description = "Demo service"
 
                 });
-            });
+            });*/
             ////
             ///
 
@@ -62,7 +65,9 @@ namespace ProjectIntrest
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
+               // app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -71,20 +76,19 @@ namespace ProjectIntrest
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseCookiePolicy();
-            app.UseAuthentication();
+           // app.UseCookiePolicy();
+          //  app.UseAuthentication();
             app.UseAuthorization();
 
 
-            app.UseEndpoints(endpoints =>
+           /* app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            });*/
             ///
-            app.UseSwagger();
-            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo Service"));
+            
             ///
 
         }
